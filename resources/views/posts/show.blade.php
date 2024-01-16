@@ -1,6 +1,5 @@
 <x-layout>
     <section class="px-6 py-8">
-
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
@@ -58,7 +57,11 @@
                                 @csrf
 
                                 <header class="flex items-center">
-                                    <img src="https://i.pravatar.cc/60?u={{ auth()->id() }}" alt="" width="60" height="60" class="rounded-full">
+                                    <img src="https://i.pravatar.cc/60?u={{ auth()->id() }}" 
+                                    alt="" 
+                                    width="60" 
+                                    height="60" 
+                                    class="rounded-full">
 
                                     <h2 class="ml-4">Want to participate?</h2>
                                 </header>
@@ -68,8 +71,12 @@
                                         name="body" 
                                         class="w-full text-sm focus:outline-none focus:ring" 
                                         rows="5" 
-                                        placeholder="Quick! Think of something to say!">
-                                    </textarea>
+                                        placeholder="Quick! Think of something to say!"
+                                        required></textarea>
+
+                                    @error('body')
+                                        <span class="text-xs text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="flex justify-end mt-3">
@@ -82,15 +89,15 @@
                         </x-panel>
                     @else
                         <p class="font-semibold">
-                            <a href="/register" class="hover:underline">Register</a> or <a href="/login" class="hover:underline">log in</a> to leave a comment.
+                            <a href="/register" class="hover:underline">Register</a> or 
+                            <a href="/login" class="hover:underline">log in</a> to leave a comment.
                         </p>
                     @endauth
 
                     @foreach ($post->comments as $comment)
-                        <x-post-comment :comment="$comment" />
+                        <x-post-comment :comment="$comment"/>
                     @endforeach
                 </section>
-
             </article>
         </main>
     </section>
